@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ghost Stories Dice</string>
+    <string name="action_settings">Settings</string>
+    <string name="taoTitle">Tao</string>
+    <string name="curseTitle">Curse</string>
+    
+    <!-- Strings for rolling the tao dice -->
+    <string name="roll1">1</string>
+    <string name="roll2">2</string>
+    <string name="roll3">3</string>
+    <string name="roll4">4</string>
+    
+    <!-- Strings for rolling the curse die -->
+    <string name="rollNormalCurse">Normal</string>
+    <string name="rollBSCurse">Black Secret</string>
+    <string name="curseDescription">Curse die roll</string>
+    
+    <!-- Strings for re rolling tao dice -->
+    <string name="reRoll">Re-Roll</string>
+    <string name="clearSelected">Clear</string>
+</resources>

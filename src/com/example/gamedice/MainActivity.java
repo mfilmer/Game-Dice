@@ -165,9 +165,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void rollTaoDice (View view) {
     	//DrawingPanel panel = (DrawingPanel) findViewById(R.id.taoCanvas);
     	//panel.invalidate();
-    	
-    	
-    	
+
     	findViewById(R.id.taoCanvas).invalidate();
     }
     

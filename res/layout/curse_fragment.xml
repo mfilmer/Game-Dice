@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000" >
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/curseFooter" >
+	    <ImageView
+	        android:id="@+id/curseDieImage"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:contentDescription="@string/curseDescription"
+	        android:scaleType="fitCenter" />
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/curseFooter"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="@android:style/Holo.ButtonBar" >
+        <Button
+            android:id="@+id/rollNormalCurse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/rollNormalCurse"
+            style="@android:style/Widget.Holo.Button.Borderless"
+            android:onClick="rollCurseDie" />
+        <Button
+            android:id="@+id/rollBSCurse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/rollBSCurse"
+            style="@android:style/Widget.Holo.Button.Borderless"
+            android:onClick="rollCurseDie" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,8 @@
 package com.example.gamedice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +16,7 @@ class DrawingPanel extends SurfaceView {
 	private int height;
 	private Paint diePaint = new Paint();
 	private TaoDie die;
+	private List<TaoDie> dieList = new ArrayList<TaoDie>();
 	
 	public DrawingPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -42,12 +46,28 @@ class DrawingPanel extends SurfaceView {
 	
 	@Override
 	public void onDraw(Canvas canvas) {
-		diePaint.setColor(die.roll());
+		/*diePaint.setColor(die.getRoll().convertColor());
 		canvas.save();
 		canvas.rotate(45, 0, 0);
 		canvas.drawRoundRect(die, 15, 15, diePaint);
-		canvas.restore();
-		// Do things like check if the dice have been updated
-		//super.onDraw(canvas);
+		canvas.restore();*/
+		for (int i = 0; i < dieList.size(); i++) {
+			dieList.get(i).draw(canvas);
+		}
+	}
+	
+	public void rollDice(int dieCount) {
+		// Generate new dice
+		dieList = new ArrayList<TaoDie>();
+		for(int i = 0; i < dieCount; i++) {
+			die = new TaoDie(width, height);
+			die.roll();
+			dieList.add(die);
+		}
+		this.invalidate();
+	}
+	
+	public void reRollDice() {
+		
 	}
 }

@@ -72,8 +72,15 @@ class DrawingPanel extends SurfaceView {
 		canvas.drawRoundRect(die, 15, 15, diePaint);
 		canvas.restore();*/
 		for (int i = 0; i < dieList.size(); i++) {
-			dieList.get(i).draw(canvas);
+			if (i > 2)
+				dieList.get(i).draw(canvas, true);
+			else
+				dieList.get(i).draw(canvas);
 		}
+	}
+	
+	private void selectDieByTap(int x, int y) {
+		findViewById(R.id.taoCanvas).invalidate();
 	}
 	
 	public void rollDice(int dieCount) {

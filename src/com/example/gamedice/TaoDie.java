@@ -13,6 +13,7 @@ public class TaoDie {
 	RectF rect;
 	TaoColor color = TaoColor.randomColor();
 	Paint diePaint = new Paint();
+	Paint extraDiePaint = new Paint();
 	Paint dotPaint = new Paint();
 	int width, height;					// Screen dimensions
 	int winMinX, winMaxX, winMinY, winMaxY;		// Die drawing window (center of die must be within window)
@@ -42,6 +43,8 @@ public class TaoDie {
 		dotPaint.setStyle(Style.FILL);
 		diePaint.setStyle(Style.FILL);
 		diePaint.setColor(Color.WHITE);
+		extraDiePaint.setStyle(Style.FILL);
+		extraDiePaint.setColor(Color.GRAY);
 	}
 	
 	public void roll() {
@@ -80,10 +83,15 @@ public class TaoDie {
 	}
 	
 	public void draw(Canvas canvas) {
+		draw(canvas, false);
+	}
+	
+	public void draw(Canvas canvas, boolean extra) {
 		canvas.save();
 		canvas.translate(x, y);
 		canvas.rotate(rotation, 0, 0);
-		canvas.drawRoundRect(rect, rectRadius, rectRadius, diePaint);
+		Paint paint = extra ? extraDiePaint : diePaint;
+		canvas.drawRoundRect(rect, rectRadius, rectRadius, paint);
 		canvas.drawCircle(0,  0,  dotRadius,  dotPaint);
 		canvas.restore();
 	}

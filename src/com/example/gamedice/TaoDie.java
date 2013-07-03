@@ -1,5 +1,7 @@
 package com.example.gamedice;
 
+import java.util.Random;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +17,7 @@ public class TaoDie {
 	int width, height;					// Screen dimensions
 	int winMinX, winMaxX, winMinY, winMaxY;		// Die drawing window (center of die must be within window)
 	int x, y;							// Die Location
+	Random dieRand = new Random();		// Random generator for die location and rotation
 	float rotation;						// Die rotation in degrees
 	double length;						// Die length
 	float dotRadius;					// Dot radius
@@ -27,9 +30,15 @@ public class TaoDie {
 		rect = new RectF(-length, -length, length, length);
 		this.width = width;
 		this.height = height;
+		
 		dieRadius = length * 1.1;
 		dotRadius = (float) (length * 0.7);
 		rectRadius = (float) (length * 0.3);
+		winMinX = (int) dieRadius;
+		winMaxX = width - (int) dieRadius;
+		winMinY = (int) dieRadius;
+		winMaxY = height - (int) dieRadius;
+		
 		dotPaint.setStyle(Style.FILL);
 		diePaint.setStyle(Style.FILL);
 		diePaint.setColor(Color.WHITE);
@@ -52,9 +61,9 @@ public class TaoDie {
 	}*/
 	
 	public void changeLocation() {
-		x = 100;
-		y = 100;
-		rotation = 20;
+		x = dieRand.nextInt(winMaxX - winMinX + 1) + winMinX;
+		y = dieRand.nextInt(winMaxY - winMinY + 1) + winMinY;
+		rotation = dieRand.nextFloat() * 90;
 	}
 	
 	// Die selection methods

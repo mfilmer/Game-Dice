@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 class DrawingPanel extends SurfaceView {
@@ -43,6 +46,23 @@ class DrawingPanel extends SurfaceView {
 		die = new TaoDie(w, h);
 		super.onSizeChanged(w, h, oldW, oldH);
 	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent e) {
+		gestureDetector.onTouchEvent(e);
+		return true;
+	}
+	
+	SimpleOnGestureListener simpleOnGestureListener = new SimpleOnGestureListener() {
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			rollDice(2);
+			findViewById(R.id.taoCanvas).invalidate();
+			return super.onSingleTapUp(e);
+		}
+	};
+	
+	GestureDetector gestureDetector = new GestureDetector(simpleOnGestureListener);
 	
 	@Override
 	public void onDraw(Canvas canvas) {

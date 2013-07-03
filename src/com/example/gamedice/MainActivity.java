@@ -167,7 +167,25 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	//panel.invalidate();
 
     	//findViewById(R.id.taoCanvas).invalidate();
-    	((DrawingPanel) findViewById(R.id.taoCanvas)).rollDice(4);
+    	
+    	DrawingPanel drawingPanel = (DrawingPanel) findViewById(R.id.taoCanvas);
+    	
+    	switch(view.getId()) {
+    	case R.id.roll1:
+    		drawingPanel.rollDice(1);
+    		break;
+    	case R.id.roll2:
+    		drawingPanel.rollDice(2);
+    		break;
+    	case R.id.roll3:
+    		drawingPanel.rollDice(3);
+    		break;
+    	case R.id.roll4:
+    		drawingPanel.rollDice(4);
+    		break;
+    	default:
+    		throw new RuntimeException("Unknown Button ID");
+    	}
     }
     
     public void rollCurseDie (View view) {

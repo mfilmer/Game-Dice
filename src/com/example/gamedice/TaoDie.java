@@ -10,11 +10,12 @@ import android.graphics.RectF;
 
 
 public class TaoDie {
-	RectF rect;
+	RectF rect, selRect;
 	TaoColor color = TaoColor.randomColor();
 	Paint diePaint = new Paint();
 	Paint extraDiePaint = new Paint();
 	Paint dotPaint = new Paint();
+	Paint selectedPaint = new Paint();
 	int width, height;					// Screen dimensions
 	int winMinX, winMaxX, winMinY, winMaxY;		// Die drawing window (center of die must be within window)
 	int x, y;							// Die Location
@@ -29,10 +30,12 @@ public class TaoDie {
 	public TaoDie(int width, int height) {
 		float length = Math.min(width, height) / 10;
 		rect = new RectF(-length, -length, length, length);
+		float selLength = length * (float) 1.1;
+		selRect = new RectF(-selLength, -selLength, selLength, selLength);
 		this.width = width;
 		this.height = height;
 		
-		dieRadius = length * 1.1;
+		dieRadius = Math.sqrt(2 * Math.pow(length, 2)) * 1.1;
 		dotRadius = (float) (length * 0.7);
 		rectRadius = (float) (length * 0.3);
 		winMinX = (int) dieRadius;
@@ -45,6 +48,8 @@ public class TaoDie {
 		diePaint.setColor(Color.WHITE);
 		extraDiePaint.setStyle(Style.FILL);
 		extraDiePaint.setColor(Color.GRAY);
+		selectedPaint.setStyle(Style.FILL);
+		selectedPaint.setColor(Color.RED);
 	}
 	
 	public void roll() {
@@ -90,9 +95,37 @@ public class TaoDie {
 		canvas.save();
 		canvas.translate(x, y);
 		canvas.rotate(rotation, 0, 0);
+		
+		// If selected first paint the selection box;
+		if (selected) {
+			canvas.drawRoundRect(selRect, rectRadius, rectRadius, selectedPaint);
+		}
 		Paint paint = extra ? extraDiePaint : diePaint;
 		canvas.drawRoundRect(rect, rectRadius, rectRadius, paint);
 		canvas.drawCircle(0,  0,  dotRadius,  dotPaint);
 		canvas.restore();
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public double getRadius() {
+		return dieRadius;
+	}
+	
+	public boolean isOverlapping(TaoDie otherDie) {
+		double dist = Math.sqrt(Math.pow(otherDie.getX() -  x,2) + Math.pow(otherDie.getY() - y,2));
+		double minRequiredDist = otherDie.getRadius() + dieRadius;
+		return dist < minRequiredDist;
+	}
+	
+	public boolean isIn(float x, float y) {
+		double dist = Math.sqrt(Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2));
+		return dist < dieRadius;
 	}
 }

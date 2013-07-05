@@ -56,8 +56,7 @@ class DrawingPanel extends SurfaceView {
 	SimpleOnGestureListener simpleOnGestureListener = new SimpleOnGestureListener() {
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
-			rollDice(2);
-			findViewById(R.id.taoCanvas).invalidate();
+			selectDieByTap(e.getX(), e.getY());
 			return super.onSingleTapUp(e);
 		}
 	};
@@ -79,7 +78,12 @@ class DrawingPanel extends SurfaceView {
 		}
 	}
 	
-	private void selectDieByTap(int x, int y) {
+	private void selectDieByTap(float x, float y) {
+		for (int i = 0;i < dieList.size();i++) {
+			if (dieList.get(i).isIn(x, y)) {
+				dieList.get(i).toggleSelect();
+			}
+		}
 		findViewById(R.id.taoCanvas).invalidate();
 	}
 	
@@ -88,10 +92,21 @@ class DrawingPanel extends SurfaceView {
 		dieList = new ArrayList<TaoDie>();
 		for(int i = 0; i < dieCount; i++) {
 			die = new TaoDie(width, height);
-			die.roll();
+			do {
+				die.roll();
+			} while (isOverlapping((ArrayList<TaoDie>) dieList, die));
 			dieList.add(die);
 		}
 		this.invalidate();
+	}
+	
+	private boolean isOverlapping(ArrayList<TaoDie> dieList, TaoDie newDie) {
+		for (int i = 0;i < dieList.size();i++) {
+			if (dieList.get(i).isOverlapping(newDie)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void reRollDice() {

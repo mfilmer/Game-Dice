@@ -72,10 +72,7 @@ class DrawingPanel extends SurfaceView {
 		canvas.drawRoundRect(die, 15, 15, diePaint);
 		canvas.restore();*/
 		for (int i = 0; i < dieList.size(); i++) {
-			if (i > 2)
-				dieList.get(i).draw(canvas, true);
-			else
-				dieList.get(i).draw(canvas);
+			dieList.get(i).draw(canvas);
 		}
 	}
 	
@@ -97,6 +94,9 @@ class DrawingPanel extends SurfaceView {
 			do {
 				die.roll();
 			} while (isOverlapping((ArrayList<TaoDie>) dieList, die));
+			if (i > 2) {
+				die.setExtra();
+			}
 			dieList.add(die);
 		}
 		invalidate();

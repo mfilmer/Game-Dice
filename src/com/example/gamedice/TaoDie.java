@@ -26,6 +26,7 @@ public class TaoDie {
 	float rectRadius;					// Rect corner radius
 	double dieRadius;					// Radius of bounding circle
 	boolean selected = false;			// Is the die currently selected
+	boolean isExtra = false;			// Is the die the extra (grey) die
 	
 	public TaoDie(int width, int height) {
 		float length = Math.min(width, height) / 10;
@@ -88,10 +89,6 @@ public class TaoDie {
 	}
 	
 	public void draw(Canvas canvas) {
-		draw(canvas, false);
-	}
-	
-	public void draw(Canvas canvas, boolean extra) {
 		canvas.save();
 		canvas.translate(x, y);
 		canvas.rotate(rotation, 0, 0);
@@ -100,7 +97,7 @@ public class TaoDie {
 		if (selected) {
 			canvas.drawRoundRect(selRect, rectRadius, rectRadius, selectedPaint);
 		}
-		Paint paint = extra ? extraDiePaint : diePaint;
+		Paint paint = isExtra ? extraDiePaint : diePaint;
 		canvas.drawRoundRect(rect, rectRadius, rectRadius, paint);
 		canvas.drawCircle(0,  0,  dotRadius,  dotPaint);
 		canvas.restore();
@@ -131,5 +128,9 @@ public class TaoDie {
 	
 	public boolean isSelected() {
 		return selected;
+	}
+	
+	public void setExtra() {
+		isExtra = true;
 	}
 }

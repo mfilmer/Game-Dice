@@ -7,51 +7,79 @@
     <FrameLayout
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:layout_above="@+id/taoFooter">
+        android:layout_above="@+id/taoFlipper">
 	    <com.example.gamedice.DrawingPanel
 	        android:id="@+id/taoCanvas"
 	        android:layout_height="fill_parent"
 	        android:layout_width="fill_parent"
 	        android:background="#000000" />
     </FrameLayout>
-    <LinearLayout
-        android:id="@+id/taoFooter"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    <ViewFlipper
+        android:id="@+id/taoFlipper"
         android:layout_alignParentBottom="true"
-        style="@android:style/Holo.ButtonBar">
-	    <Button
-	        android:id="@+id/roll1"
-	        android:layout_width="0dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+	    <LinearLayout
+	        android:id="@+id/taoFooter"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/roll1"
-	        android:layout_weight="1" 
-	        style="@android:style/Widget.Holo.Button.Borderless"
-	        android:onClick="rollTaoDice" />
-	    <Button
-	        android:id="@+id/roll2"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/roll2" 
-	        android:layout_weight="1"
-	        style="@android:style/Widget.Holo.Button.Borderless"
-	        android:onClick="rollTaoDice" />
-	    <Button
-	        android:id="@+id/roll3"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/roll3"
-	        android:layout_weight="1"
-	        style="@android:style/Widget.Holo.Button.Borderless"
-	        android:onClick="rollTaoDice" />
-	    <Button
-	        android:id="@+id/roll4"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/roll4" 
-	        android:layout_weight="1"
-	        style="@android:style/Widget.Holo.Button.Borderless"
-	        android:onClick="rollTaoDice" />
-	    </LinearLayout>
+	        android:orientation="horizontal"
+	        style="@android:style/Holo.ButtonBar">
+		    <Button
+		        android:id="@+id/roll1"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/roll1"
+		        android:layout_weight="1" 
+		        style="@android:style/Widget.Holo.Button.Borderless"
+		        android:onClick="rollTaoDice" />
+		    <Button
+		        android:id="@+id/roll2"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/roll2" 
+		        android:layout_weight="1"
+		        style="@android:style/Widget.Holo.Button.Borderless"
+		        android:onClick="rollTaoDice" />
+		    <Button
+		        android:id="@+id/roll3"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/roll3"
+		        android:layout_weight="1"
+		        style="@android:style/Widget.Holo.Button.Borderless"
+		        android:onClick="rollTaoDice" />
+		    <Button
+		        android:id="@+id/roll4"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/roll4" 
+		        android:layout_weight="1"
+		        style="@android:style/Widget.Holo.Button.Borderless"
+		        android:onClick="rollTaoDice" />
+		    </LinearLayout>
+		    <LinearLayout
+		        android:id="@+id/reRollFooter"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        style="@android:style/Holo.ButtonBar">
+		        <Button
+		            android:id="@+id/clear"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/clearSelected"
+		            android:layout_weight="1"
+		            style="@android:style/Widget.Holo.Button.Borderless"
+		            android:onClick="clearSelected" />
+		        <Button
+		            android:id="@+id/reRoll"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/reRoll"
+		            android:layout_weight="2"
+		            style="@android:style/Widget.Holo.Button.Borderless"
+		            android:onClick="reRoll" />
+		    </LinearLayout>
+	    </ViewFlipper>
 </RelativeLayout>

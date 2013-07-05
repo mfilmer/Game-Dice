@@ -193,4 +193,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	image.setImageResource(R.drawable.testimage);
     }
     
+    public void clearSelected (View view) {
+    	
+    }
+    
+    public void reRoll (View view) {
+    	
+    }
 }

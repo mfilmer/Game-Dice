@@ -128,4 +128,8 @@ public class TaoDie {
 		double dist = Math.sqrt(Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2));
 		return dist < dieRadius;
 	}
+	
+	public boolean isSelected() {
+		return selected;
+	}
 }

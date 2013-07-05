@@ -13,6 +13,8 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ViewFlipper;
 
 class DrawingPanel extends SurfaceView {
 	private int width;
@@ -82,9 +84,10 @@ class DrawingPanel extends SurfaceView {
 		for (int i = 0;i < dieList.size();i++) {
 			if (dieList.get(i).isIn(x, y)) {
 				dieList.get(i).toggleSelect();
+				fixButtonBar();
 			}
 		}
-		findViewById(R.id.taoCanvas).invalidate();
+		invalidate();
 	}
 	
 	public void rollDice(int dieCount) {
@@ -97,7 +100,7 @@ class DrawingPanel extends SurfaceView {
 			} while (isOverlapping((ArrayList<TaoDie>) dieList, die));
 			dieList.add(die);
 		}
-		this.invalidate();
+		invalidate();
 	}
 	
 	private boolean isOverlapping(ArrayList<TaoDie> dieList, TaoDie newDie) {
@@ -111,5 +114,18 @@ class DrawingPanel extends SurfaceView {
 	
 	public void reRollDice() {
 		
+	}
+	
+	private void fixButtonBar() {
+		final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.taoFlipper);
+		for (int i = 0;i < dieList.size();i++) {
+			if (dieList.get(i).isSelected()) {
+				//viewFlipper.setDisplayedChild(1);
+				//viewFlipper.showNext();
+				return;
+			}
+		}
+		//viewFlipper.setDisplayedChild(0);
+		//viewFlipper.showNext();
 	}
 }

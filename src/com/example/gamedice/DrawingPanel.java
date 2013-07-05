@@ -1,7 +1,6 @@
 package com.example.gamedice;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -21,7 +20,7 @@ class DrawingPanel extends SurfaceView {
 	private int height;
 	private Paint diePaint = new Paint();
 	private TaoDie die;
-	private List<TaoDie> dieList = new ArrayList<TaoDie>();
+	private ArrayList<TaoDie> dieList = new ArrayList<TaoDie>();
 	
 	public DrawingPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -113,19 +112,47 @@ class DrawingPanel extends SurfaceView {
 	}
 	
 	public void reRollDice() {
-		
+		ArrayList<TaoDie> selectedDieList = new ArrayList<TaoDie>();
+		ArrayList<TaoDie> unselectedDieList = new ArrayList<TaoDie>();
+		for (int i = 0;i < dieList.size();i++) {
+			TaoDie die = dieList.get(i);
+			if (die.isSelected()) {
+				selectedDieList.add(die);
+			}
+			else {
+				unselectedDieList.add(die);
+			}
+		}
+		dieList = unselectedDieList;
+		for (int i = 0;i < selectedDieList.size();i++) {
+			TaoDie die = selectedDieList.get(i);
+			do {
+				die.roll();
+			} while (isOverlapping((ArrayList<TaoDie>) dieList, die));
+			dieList.add(die);
+		}
+		invalidate();
+	}
+	
+	public void clearSelected() {
+		for (int i = 0;i < dieList.size();i++) {
+			dieList.get(i).unselect();
+		}
+		fixButtonBar();
+		invalidate();
 	}
 	
 	private void fixButtonBar() {
-		final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.taoFlipper);
+		final View parent = (View) ((View) getParent()).getParent();
+		final ViewFlipper viewFlipper = (ViewFlipper) parent.findViewById(R.id.taoFlipper);
 		for (int i = 0;i < dieList.size();i++) {
 			if (dieList.get(i).isSelected()) {
-				//viewFlipper.setDisplayedChild(1);
+				viewFlipper.setDisplayedChild(1);
 				//viewFlipper.showNext();
 				return;
 			}
 		}
-		//viewFlipper.setDisplayedChild(0);
+		viewFlipper.setDisplayedChild(0);
 		//viewFlipper.showNext();
 	}
 }

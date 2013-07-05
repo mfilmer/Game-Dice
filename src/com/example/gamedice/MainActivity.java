@@ -194,10 +194,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
     
     public void clearSelected (View view) {
-    	
+    	final DrawingPanel canvas = (DrawingPanel) findViewById(R.id.taoCanvas);
+    	canvas.clearSelected();
     }
     
     public void reRoll (View view) {
-    	
+    	final DrawingPanel canvas = (DrawingPanel) findViewById(R.id.taoCanvas);
+    	canvas.reRollDice();
     }
 }

@@ -46,7 +46,8 @@ public class TaoDie {
 		
 		dotPaint.setStyle(Style.FILL);
 		diePaint.setStyle(Style.FILL);
-		diePaint.setColor(Color.WHITE);
+		//diePaint.setColor(Color.WHITE);
+		diePaint.setARGB(255, 230, 230, 230);
 		extraDiePaint.setStyle(Style.FILL);
 		extraDiePaint.setColor(Color.GRAY);
 		selectedPaint.setStyle(Style.FILL);
